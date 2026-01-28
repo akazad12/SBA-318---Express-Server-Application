@@ -1,7 +1,7 @@
 //Imports
 import express from "express";
 import globalErr from "./middlewares/globalErr.js"
-import logReq from "./middlewares/globalErr.js"
+import {logReq,activityLog} from "./middlewares/middleware.js"
 // import db from "./database/database.js"
 import users from "./routes/users.js"
 import jobs from "./routes/jobs.js"
@@ -17,6 +17,7 @@ const PORT = 3000;
 app.use(express.json()); //Parses the request body into JSON
 //logging middleware:
 app.use(logReq)
+app.use(activityLog)
 
 
 
