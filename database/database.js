@@ -38,15 +38,15 @@ export default {
 
   // Responses (application status)
   responses: [
-    { applicationId: 1, status: "interview", appliedDate: "2026-01-10" },
-    { applicationId: 2, status: "applied", appliedDate: "2026-01-15" },
-    { applicationId: 3, status: "rejected", appliedDate: "2026-01-05" },
-    { applicationId: 4, status: "interview", appliedDate: "2026-01-18" },
-    { applicationId: 5, status: "applied", appliedDate: "2026-01-20" },
-    { applicationId: 6, status: "offer", appliedDate: "2026-01-25" },
-    { applicationId: 7, status: "applied", appliedDate: "2026-01-28" },
-    { applicationId: 8, status: "interview", appliedDate: "2026-02-01" },
-    { applicationId: 9, status: "rejected", appliedDate: "2026-02-03" },
-    { applicationId: 10, status: "applied", appliedDate: "2026-02-07" }
+    { id:1, applicationId: 1, status: "interview", appliedDate: "2026-01-10" },
+    { id:2, applicationId: 2, status: "applied", appliedDate: "2026-01-15" },
+    { id:3, applicationId: 3, status: "rejected", appliedDate: "2026-01-05" },
+    { id:4, applicationId: 4, status: "interview", appliedDate: "2026-01-18" },
+    { id:5, applicationId: 5, status: "applied", appliedDate: "2026-01-20" },
+    { id:6, applicationId: 6, status: "offer", appliedDate: "2026-01-25" },
+    { id:7, applicationId: 7, status: "applied", appliedDate: "2026-01-28" },
+    { id:8, applicationId: 8, status: "interview", appliedDate: "2026-02-01" },
+    { id:9, applicationId: 9, status: "rejected", appliedDate: "2026-02-03" },
+    { id:10,applicationId: 10, status: "applied", appliedDate: "2026-02-07" }
   ]
 };

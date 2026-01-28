@@ -5,6 +5,7 @@ import logReq from "./middlewares/globalErr.js"
 // import db from "./database/database.js"
 import users from "./routes/users.js"
 import jobs from "./routes/jobs.js"
+import response from "./routes/response.js"
 
 
 //Setups
@@ -27,7 +28,7 @@ app.use(logReq)
 
 app.use('/api/users',users)
 app.use('/api/roles',jobs)
-// app.use('/api/link',applications)
+app.use('/api/response',response)
 // app.use('/api/response',responses)
 
 
