@@ -17,10 +17,10 @@ app.use((req,res,next)=>{
     if(req.body){
         console.log(`req Date:`, req.body)
     }
-    next
+    next()
 });
 
-app.get('/',(req,res)=>{
+app.get('/test',(req,res)=>{
     res.send('hollo')
 })
 
