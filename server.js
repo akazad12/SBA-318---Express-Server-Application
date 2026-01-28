@@ -2,14 +2,15 @@
 import express from "express";
 import globalErr from "./middlewares/globalErr.js"
 import logReq from "./middlewares/globalErr.js"
-import db from "./database/database.js"
+// import db from "./database/database.js"
 import users from "./routes/users.js"
+import jobs from "./routes/jobs.js"
 
 
 //Setups
 const app = express();
 const PORT = 3000;
-const { applicants, jobs, applications, responses } = db;
+
 
 //Middleware 
 app.use(express.json()); //Parses the request body into JSON
@@ -25,7 +26,7 @@ app.use(logReq)
 //Routes
 
 app.use('/api/users',users)
-// app.use('/api/roles',jobs)
+app.use('/api/roles',jobs)
 // app.use('/api/link',applications)
 // app.use('/api/response',responses)
 
