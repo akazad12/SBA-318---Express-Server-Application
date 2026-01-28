@@ -1,28 +1,21 @@
 //Imports
 import express from "express";
-import {globalErr} from "./middlewares/globalErr.js"
-//import location from "./routes/locations.js"
+import globalErr from "./middlewares/globalErr.js"
+import logReq from "./middlewares/globalErr.js"
+import db from "./database/database.js"
+import users from "./routes/users.js"
 
 
 //Setups
 const app = express();
 const PORT = 3000;
+const { applicants, jobs, applications, responses } = db;
 
 //Middleware 
 app.use(express.json()); //Parses the request body into JSON
 //logging middleware:
-app.use((req,res,next)=>{
-    console.log(`${req.method}- ${req.url}`);
+app.use(logReq)
 
-    if(req.body){
-        console.log(`req Date:`, req.body)
-    }
-    next()
-});
-
-app.get('/test',(req,res)=>{
-    res.send('hollo')
-})
 
 
 //Customer View Engine
@@ -30,14 +23,17 @@ app.get('/test',(req,res)=>{
 //Set it into express
 
 //Routes
-// app.get("/home",(req,res)=> {
-//     res.render("index")
-// });
+
+app.use('/api/users',users)
+// app.use('/api/roles',jobs)
+// app.use('/api/link',applications)
+// app.use('/api/response',responses)
+
 
 //app.use("/location",location)
 
 //Global Err handling middleware
-//app.use(globalErr);
+app.use(globalErr);
 //Listener
 app.listen(PORT,()=>{
     console.log(`Server running on PORT: ${PORT}`)
