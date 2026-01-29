@@ -36,25 +36,25 @@ app.engine("html", function (filePath, options, cb) {
         let list = "";
         let users = db.applicants.reduce((userDict, user) => {
             userDict[user.id] = user;
-            delete userDict[user.id]["id"]
+            //delete userDict[user.id]["id"]
             return userDict;
         }, {})
         let jobs = db.jobs.reduce((jobDict, job) => {
             jobDict[job.id] = job;
-            delete jobDict[job.id]["id"]
+            //delete jobDict[job.id]["id"]
             
             return jobDict;
         }, {})
         let applications = db.applications.reduce((applicationDict, application) => {
             applicationDict[application.id] = application;
-            delete applicationDict[application.id]["id"]
+            // delete applicationDict[application.id]["id"]
             
             return applicationDict;
         }, {})
         
         let responses = db.responses.reduce((responseDict, response) => {
             responseDict[response.id] = response;
-            delete responseDict[response.id]["id"]
+            // delete responseDict[response.id]["id"]
             
             return responseDict;
         }, {})
@@ -72,15 +72,19 @@ app.engine("html", function (filePath, options, cb) {
             finalObj[key]={...user,  ...job, ...response}
             
         })
-        console.log(finalObj)
-        //Headers used to name the row of the output table (Hard Coded b/c not changed later)
-        let headers = ["name","email","company","role","location","status",'appliedDate']
-            console.log(headers)
-            for (let head of headers){
-                console.log(head)
-                    list += `<th>${head}</th>`
 
+        //Headers used to name the row of the output table (Hard Coded b/c not changed later)
+        let userHeaders = ["name","email"]
+        let jobHeaders = ["company","role","location"]
+        let responseHeaders = ["status",'appliedDate']
+        let headers = [...userHeaders,...jobHeaders,...responseHeaders]
+            for (let head of headers){
+                    list += `<th>${head}</th>`
         }
+
+
+
+
         //Dynamically generating the rows using HTML
         Object.keys(finalObj).forEach(obj =>{
             list +=`<tr>`
@@ -90,7 +94,53 @@ app.engine("html", function (filePath, options, cb) {
             }
             list += `</tr>`
         })
+        //Users table generation
         let rendered = content.toString().replace("#list#", list);
+        list = "";
+         for (let head of userHeaders){
+                    list += `<th>${head}</th>`
+        }
+        Object.keys(users).forEach(obj =>{
+            list +=`<tr>`
+            for (let head of userHeaders){
+
+                list += `<td>${finalObj[obj][head]}</td>`;
+            }
+            list += `</tr>`
+        })
+       rendered = rendered.toString().replace("#users#", list);
+       //jobs table generation
+       list = "";
+         for (let head of jobHeaders){
+                    list += `<th>${head}</th>`
+        }
+        Object.keys(jobs).forEach(obj =>{
+            list +=`<tr>`
+            for (let head of jobHeaders){
+
+                list += `<td>${finalObj[obj][head]}</td>`;
+            }
+            list += `</tr>`
+        })
+       rendered = rendered.toString().replace("#jobs#", list);
+       //User table generation
+       list = "";
+         for (let head of responseHeaders){
+                    list += `<th>${head}</th>`
+        }
+        Object.keys(responses).forEach(obj =>{
+            list +=`<tr>`
+            for (let head of responseHeaders){
+
+                list += `<td>${finalObj[obj][head]}</td>`;
+            }
+            list += `</tr>`
+        })
+       rendered = rendered.toString().replace("#responses#", list);
+
+       
+
+
         //  return cb(null,list)
         return cb(null, rendered)
     })
@@ -103,12 +153,6 @@ app.use(express.static("./styles"));
 
 //Routes
 app.get("/", (req, res) => {
-    // let list = "";
-
-    //     for (let user of db.applicants ){
-    //         list += `<li>${user.email}</li>`;
-    //     }
-    //     let rendered = content.toString().replace("#list#", list);
 
     res.render("index");
 });
