@@ -10,7 +10,9 @@ router.route('/')
     const regex = /^\d{4}-\d{2}-\d{2}$/
 
     //Error handling
+    //checks if input values are empty
     if (applicationId && status && appliedDate) {
+      //checks if format for date is correct
       if (regex.test(appliedDate)) {
         let id;
         if (db.responses.length == 0) {
