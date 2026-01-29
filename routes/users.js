@@ -57,7 +57,7 @@ router
     if (updatedUser) {
       res.json({ updatedUser });
     } else {
-      res.status(400).json({ error: "Could not find todo!" });
+      res.status(400).json({ error: `Could not find user for id: ${id}`});
     }
   })
    .delete((req, res) => {
@@ -72,7 +72,7 @@ router
     if (deletedUser) {
       res.json({ deletedUser });
     } else {
-      res.status(400).json({ error: "Could not find todo!" });
+      res.status(400).json({ error: `Could not find user for id: ${id}` });
     }
   });
 

@@ -4,34 +4,38 @@ import db from "../database/database.js"
 const router = express.Router();
 
 router.route('/')
-//Create
-.post((req,res) =>{
-    let{applicationId, status, appliedDate}= req.body
+  //Create
+  .post((req, res) => {
+    let { applicationId, status, appliedDate } = req.body
+    const regex = /^\d{4}-\d{2}-\d{2}$/
 
     //Error handling
-    if (applicationId&&status&&appliedDate){
+    if (applicationId && status && appliedDate) {
+      if (regex.test(appliedDate)) {
         let id;
-        if (db.responses.length ==0){
-            id = 1
+        if (db.responses.length == 0) {
+          id = 1
         } else {
-            id = db.responses[db.responses.length -1].id +1
+          id = db.responses[db.responses.length - 1].id + 1
         }
         let newResponse = {
-            id : id,
-            applicationId,
-            status,
-            appliedDate
+          id: id,
+          applicationId,
+          status,
+          appliedDate
         }
         db.responses.push(newResponse);
         res.status(201).json(newResponse)
 
-
-    } else{
-        res.status(400).json({error: 'Insufficent Data'})
+      } else {
+        res.status(400).json({ error: 'Wrong Date Format' })
+      }
+    } else {
+      res.status(400).json({ error: 'Insufficent Data' })
     }
-})
-//Read
-.get((req, res) => {
+  })
+  //Read
+  .get((req, res) => {
     res.json(db.responses);
   });
 //Update 
@@ -52,10 +56,10 @@ router
     if (updatedresponse) {
       res.json({ updatedresponse });
     } else {
-      res.status(400).json({ error: "Could not find todo!" });
+      res.status(400).json({ error: `Could not find response for id: ${id}` });
     }
   })
-   .delete((req, res) => {
+  .delete((req, res) => {
     let id = req.params.id;
 
     let deletedresponse = db.responses.find((responseInfo, i) => {
@@ -67,7 +71,7 @@ router
     if (deletedresponse) {
       res.json({ deletedresponse });
     } else {
-      res.status(400).json({ error: "Could not find todo!" });
+      res.status(400).json({ error: `Could not find response for id: ${id}` });
     }
   });
 

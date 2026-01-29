@@ -52,7 +52,7 @@ router
     if (updatedjob) {
       res.json({ updatedjob });
     } else {
-      res.status(400).json({ error: "Could not find todo!" });
+      res.status(400).json({ error: `Could not find job for id: ${id}` });
     }
   })
    .delete((req, res) => {
@@ -67,7 +67,7 @@ router
     if (deletedjob) {
       res.json({ deletedjob });
     } else {
-      res.status(400).json({ error: "Could not find todo!" });
+      res.status(400).json({ error: `Could not find job for id: ${id}` });
     }
   });
 
