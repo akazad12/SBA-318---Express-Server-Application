@@ -22,6 +22,12 @@ app.use(activityLog)
 
 
 //Customer View Engine
+// app.engine("html",function(filePath,options,cb){
+//     fs.readFile(filePath,(error,content)=>{
+//         if (err) return cb(err);
+//         let 
+//     })
+// })
 
 //Set it into express
 
@@ -33,7 +39,6 @@ app.use('/api/response',response)
 // app.use('/api/response',responses)
 
 
-//app.use("/location",location)
 
 //Global Err handling middleware
 app.use(globalErr);

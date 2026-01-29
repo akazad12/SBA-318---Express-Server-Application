@@ -8,9 +8,18 @@ router.route('/')
 //Create
 .post((req,res) =>{
     let{name,email}= req.body
+    const regex = /^[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z]+$/
 
     //Error handling
-    if (name&&email){
+    //Checks if user has inputed both name and email parameters
+    if (!name || !email){
+        res.status(400).json({error: 'Insufficent Data'})
+    }
+
+    else if (!regex.test(email)){ //Checks if the format for the email is correct using Regex
+        res.status(400).json({error: 'Invalid Email Format (use: name@company.com)'})
+    }
+    else{
         let id;
         if (db.applicants.length ==0){
             id = 1
@@ -24,11 +33,7 @@ router.route('/')
         }
         db.applicants.push(newApply);
         res.status(201).json(newApply)
-
-
-    } else{
-        res.status(400).json({error: 'Insufficent Data'})
-    }
+    } 
 })
 //Read
 .get((req, res) => {
