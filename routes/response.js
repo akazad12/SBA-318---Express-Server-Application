@@ -8,6 +8,7 @@ router.route('/')
   .post((req, res) => {
     let { applicationId, status, appliedDate } = req.body
     const regex = /^\d{4}-\d{2}-\d{2}$/
+  
 
     //Error handling
     //checks if input values are empty
@@ -27,12 +28,15 @@ router.route('/')
           appliedDate
         }
         db.responses.push(newResponse);
+                res.redirect("/home");
+
         res.status(201).json(newResponse)
 
       } else {
         res.status(400).json({ error: 'Wrong Date Format' })
       }
     } else {
+      console.log(req.body)
       res.status(400).json({ error: 'Insufficent Data' })
     }
   })

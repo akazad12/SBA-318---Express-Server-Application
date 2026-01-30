@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <div class = "hidden">
-        <form action="/" method="GET">
+    <div class="">
+        <form action="/api/filter" method="POST">
             <!-- Form for selecting the table that will be displayed -->
             <fieldset>
                 <legend>
@@ -18,7 +18,7 @@
                 </legend>
                 <!-- <input type="text" name="todo" id="todo" placeholder="Todo..."/><br /> -->
                 <label>Table:
-                    <select name="category" id="category">
+                    <select name="table" id="table">
                         <option value="" disabled selected>--Select a Table--</option>
                         <!-- This is the default placeholder -->
                         <option value="Users">Users</option>
@@ -31,8 +31,8 @@
             </fieldset>
         </form>
     </div>
-    <div class = "" id="userDiv">
-        <form action="/api/users" method="GET">
+    <div class="" id="userDiv">
+        <form action="/api/users" method="POST">
             <fieldset>
                 <legend>
                     <h2>User</h2>
@@ -46,8 +46,8 @@
             #users#
         </table>
     </div>
-    <div class = "" id="jobDiv">
-        <form action="/api/jobs" method="GET">
+    <div class="" id="jobDiv">
+        <form action="/api/jobs" method="POST">
             <fieldset>
                 <legend>
                     <h2>Job</h2>
@@ -63,29 +63,43 @@
             #jobs#
         </table>
     </div>
-    <div class = "" id="responseDiv">
-        <form action="/api/responses" method="GET">
+    <div class="" id="responseDiv">
+        <form action="/api/responses" method="POST">
             <fieldset>
                 <legend>
                     <h2>Job Status</h2>
                 </legend>
-                <input type="text" name="name" id="status" placeholder="status..." /><br />
-                <input type="date" name="AppliedDate" id="AppliedDate" placeholder="AppliedDate..." /><br />
+                <select name="applicationId" id="applicationId">
+                    <option value="" disabled selected>--Select a User--</option>
 
+                    #applicantIds#
+                </select><br />
+                <select name="status" id="status">
+                                            <option value="" disabled selected>--Select a status--</option>
+
+                <option>applied</option>    
+                <option>interview</option>    
+                <option>reject</option>    
+                <option>offer</option>    
+
+                </select><br />
+                <input type="date" name="appliedDate" id="appliedDate" placeholder="AppliedDate..." /><br />
                 <input type="submit" value="Submit" />
+
+
             </fieldset>
         </form>
         <table id="responses">
             #responses#
         </table>
     </div>
-    <div class = "" id="trackerDiv">
+    <div class="" id="trackerDiv">
         <form action="/" method="GET"></form>
-        <fieldset>
+        <!-- <fieldset> -->
             <legend>
                 <h2> Job Tracker</h2>
             </legend>
-            <label>Applicant:
+            <!-- <label>Applicant:
                 <select name="applicantId" id="applicantId">
                     <option value="" disabled selected>--Select a User--</option>
                 </select><br />
@@ -95,8 +109,8 @@
                     <option value="" disabled selected>--Select a User--</option>
                 </select><br />
             </label>
-            <input type="submit" value="Submit" />
-        </fieldset>
+            <input type="submit" value="Submit" /> -->
+        <!-- </fieldset> -->
 
         </form>
         <table id="tracker">

@@ -23,6 +23,8 @@ router.route('/')
             location
         }
         db.jobs.push(newJob);
+          res.redirect("/home");
+
         res.status(201).json(newJob)
 
 

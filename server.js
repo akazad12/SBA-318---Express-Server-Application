@@ -6,6 +6,8 @@ import db from "./database/database.js"
 import users from "./routes/users.js"
 import jobs from "./routes/jobs.js"
 import response from "./routes/response.js"
+// import filter from "./routes/filter.js"
+
 import fs from "fs"
 
 
@@ -25,10 +27,6 @@ app.use(activityLog)
 
 //Customer View Engine
 app.engine("html", function (filePath, options, cb) {
-    console.log(options)
-
-
-    // fs.readFile(filePath,(err,content)=>{
     fs.readFile(filePath, (err, content) => {
 
         if (err) return cb(err);
@@ -38,18 +36,16 @@ app.engine("html", function (filePath, options, cb) {
         let list = "";
         let users = db.applicants.reduce((userDict, user) => {
             userDict[user.id] = user;
-            //delete userDict[user.id]["id"]
             return userDict;
         }, {})
+        console.log(users)
         let jobs = db.jobs.reduce((jobDict, job) => {
             jobDict[job.id] = job;
-            //delete jobDict[job.id]["id"]
             
             return jobDict;
         }, {})
         let applications = db.applications.reduce((applicationDict, application) => {
             applicationDict[application.id] = application;
-            // delete applicationDict[application.id]["id"]
             
             return applicationDict;
         }, {})
@@ -106,7 +102,7 @@ app.engine("html", function (filePath, options, cb) {
             list +=`<tr>`
             for (let head of userHeaders){
 
-                list += `<td>${finalObj[obj][head]}</td>`;
+                list += `<td>${users[obj][head]}</td>`;
             }
             list += `</tr>`
         })
@@ -120,7 +116,7 @@ app.engine("html", function (filePath, options, cb) {
             list +=`<tr>`
             for (let head of jobHeaders){
 
-                list += `<td>${finalObj[obj][head]}</td>`;
+                list += `<td>${jobs[obj][head]}</td>`;
             }
             list += `</tr>`
         })
@@ -134,13 +130,27 @@ app.engine("html", function (filePath, options, cb) {
             list +=`<tr>`
             for (let head of responseHeaders){
 
-                list += `<td>${finalObj[obj][head]}</td>`;
+                list += `<td>${responses[obj][head]}</td>`;
             }
             list += `</tr>`
         })
        rendered = rendered.toString().replace("#responses#", list);
+       list = "";
+        //  for (let head of responseHeaders){
+        //             list += `<th>${head}</th>`
+        // }
+        Object.keys(users).forEach(obj =>{
+            // list +=`<tr>`
+            // for (let head of responseHeaders){
+                let name = "name"
+                list += `<option value =${obj}>${users[obj][name]} </option>`;
+            // }
+            // list += `</tr>`
+        })
+       rendered = rendered.toString().replace("#applicantIds#", list);
 
-       
+                            //    <option value="Master">Job Tracker</option>
+
 
 
         //  return cb(null,list)
@@ -154,7 +164,7 @@ app.set("view engine", "html");
 app.use(express.static("./styles"));
 
 //Routes
-app.get("/", (req, res) => {
+app.get("/home", (req, res) => {
 
     res.render("index");
 });
@@ -162,6 +172,8 @@ app.get("/", (req, res) => {
 app.use('/api/users', users)
 app.use('/api/roles', jobs)
 app.use('/api/responses', response)
+// app.use('/api/filter', filter)
+
 // console.log(Document)
 // app.use('/api/response',responses)
 

@@ -32,6 +32,9 @@ router.route('/')
             email
         }
         db.applicants.push(newApply);
+
+        
+        res.redirect("/home");
         res.status(201).json(newApply)
     } 
 })
