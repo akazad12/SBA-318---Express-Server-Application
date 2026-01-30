@@ -1,30 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
     <title>Document</title>
 </head>
+
 <body>
-    <form action= "/" method = "GET">
+    <div class = "hidden">
+        <form action="/" method="GET">
+            <!-- Form for selecting the table that will be displayed -->
+            <fieldset>
+                <legend>
+                    <h2> Recent Applications & Users</h2>
+                </legend>
+                <!-- <input type="text" name="todo" id="todo" placeholder="Todo..."/><br /> -->
+                <label>Table:
+                    <select name="category" id="category">
+                        <option value="" disabled selected>--Select a Table--</option>
+                        <!-- This is the default placeholder -->
+                        <option value="Users">Users</option>
+                        <option value="jobs">Jobs</option>
+                        <option value="status">Jobs Status</option>
+                        <option value="Master">Job Tracker</option>
+                    </select><br />
+                </label>
+                <input type="submit" value="Submit" />
+            </fieldset>
+        </form>
+    </div>
+    <div class = "" id="userDiv">
+        <form action="/api/users" method="GET">
+            <fieldset>
+                <legend>
+                    <h2>User</h2>
+                </legend>
+                <input type="text" name="name" id="name" placeholder="name..." /><br />
+                <input type="text" name="email" id="email" placeholder="email..." /><br />
+                <input type="submit" value="Submit" />
+            </fieldset>
+        </form>
+        <table id="users">
+            #users#
+        </table>
+    </div>
+    <div class = "" id="jobDiv">
+        <form action="/api/jobs" method="GET">
+            <fieldset>
+                <legend>
+                    <h2>Job</h2>
+                </legend>
+                <input type="text" name="company" id="company" placeholder="company..." /><br />
+                <input type="text" name="role" id="role" placeholder="role..." /><br />
+                <input type="text" name="location" id="location" placeholder="location..." /><br />
+
+                <input type="submit" value="Submit" />
+            </fieldset>
+        </form>
+        <table id="jobs">
+            #jobs#
+        </table>
+    </div>
+    <div class = "" id="responseDiv">
+        <form action="/api/responses" method="GET">
+            <fieldset>
+                <legend>
+                    <h2>Job Status</h2>
+                </legend>
+                <input type="text" name="name" id="status" placeholder="status..." /><br />
+                <input type="date" name="AppliedDate" id="AppliedDate" placeholder="AppliedDate..." /><br />
+
+                <input type="submit" value="Submit" />
+            </fieldset>
+        </form>
+        <table id="responses">
+            #responses#
+        </table>
+    </div>
+    <div class = "" id="trackerDiv">
+        <form action="/" method="GET"></form>
         <fieldset>
             <legend>
-                <h2> Recent Applications & Users</h2>
+                <h2> Job Tracker</h2>
             </legend>
+            <label>Applicant:
+                <select name="applicantId" id="applicantId">
+                    <option value="" disabled selected>--Select a User--</option>
+                </select><br />
+            </label>
+            <label>Job:
+                <select name="jobId" id="jobId">
+                    <option value="" disabled selected>--Select a User--</option>
+                </select><br />
+            </label>
+            <input type="submit" value="Submit" />
         </fieldset>
-    </form>
-    <table>
-        #list#
-    </table>
-    <table>
-        #users#
-    </table>
-    <table>
-        #jobs#
-    </table>
-    <table>
-        #responses#
-    </table>
-    
+
+        </form>
+        <table id="tracker">
+            #list#
+        </table>
+    </div>
+
 </body>
+
 </html>

@@ -38,6 +38,11 @@ router.route('/')
   })
   //Read
   .get((req, res) => {
+    let result = db.responses
+    if (req.query.status){
+      result = db.responses.filter(response => response.status === req.query.status);
+      res.json(result)
+    }
     res.json(db.responses);
   });
 //Update 

@@ -15,6 +15,7 @@ const PORT = 3001;
 
 
 //Middleware 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); //Parses the request body into JSON
 //logging middleware:
 app.use(logReq)
@@ -24,6 +25,7 @@ app.use(activityLog)
 
 //Customer View Engine
 app.engine("html", function (filePath, options, cb) {
+    console.log(options)
 
 
     // fs.readFile(filePath,(err,content)=>{
@@ -159,7 +161,8 @@ app.get("/", (req, res) => {
 
 app.use('/api/users', users)
 app.use('/api/roles', jobs)
-app.use('/api/response', response)
+app.use('/api/responses', response)
+// console.log(Document)
 // app.use('/api/response',responses)
 
 

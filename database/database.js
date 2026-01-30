@@ -36,7 +36,7 @@ export default {
     { id: 10, applicantId: 5, jobId: 10 }
   ],
 
-  // Responses (application status)
+  // Responses (application status)/api/response?status=applied
   responses: [
     { id:1, applicationId: 1, status: "interview", appliedDate: "2026-01-10" },
     { id:2, applicationId: 2, status: "applied", appliedDate: "2026-01-15" },
